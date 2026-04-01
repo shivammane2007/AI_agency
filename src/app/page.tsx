@@ -1,65 +1,376 @@
-import Image from "next/image";
+"use client";
+
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { Button } from "@/components/ui/Button";
+import { Card, CardFront, CardBack } from "@/components/ui/Card";
+import { ArrowRight, Bot, BrainCircuit, Cpu, Zap, Target, Layers, ShieldCheck, Users, BarChart3, Search, MessageSquare, Rocket } from "lucide-react";
+import Link from "next/link";
+import { GlassPane } from "@/components/ui/GlassPane";
+import { MetricCard } from "@/components/ui/MetricCard";
+import { ProcessStep } from "@/components/ui/ProcessStep";
+import { useState, useEffect } from "react";
+
+gsap.registerPlugin(useGSAP);
 
 export default function Home() {
+  const container = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
+  const heroButtonsRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+
+      // Hero Text Reveal
+      tl.from(".hero-text-line", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power4.out",
+      })
+        .from(
+          heroButtonsRef.current,
+          {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.5"
+        );
+
+      // Features Cards Stagger
+      gsap.from(".feature-card", {
+        scrollTrigger: {
+          trigger: ".features-section",
+          start: "top 80%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+      });
+
+      // Stats Section Fade In
+      gsap.from(".stats-header", {
+        scrollTrigger: {
+          trigger: ".stats-section",
+          start: "top 80%",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+
+      // Process Section Timeline
+      gsap.from(".process-title", {
+        scrollTrigger: {
+          trigger: ".process-section",
+          start: "top 80%",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+    },
+    { scope: container }
+  );
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div ref={container} className="flex flex-col bg-dot-pattern">
+      {/* HERO SECTION */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        {/* Abstract Background */}
+        <div className="absolute inset-0 -z-10 bg-grid-pattern opacity-50" />
+        <div className="absolute inset-0 -z-10">
+          <div 
+            className="absolute w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] transition-transform duration-1000 ease-out"
+            style={{ 
+              left: `${mousePos.x - 300}px`, 
+              top: `${mousePos.y - 300}px`,
+              opacity: 0.4
+            }} 
+          />
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[120px] animate-pulse-slow" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-sky-500/10 rounded-full blur-[100px] animate-pulse-slow delay-700" />
+          <div className="absolute inset-0 bg-noise opacity-30" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <div className="container mx-auto px-6 text-center z-10" ref={heroTextRef}>
+          <div className="overflow-hidden mb-4">
+            <h1 className="hero-text-line text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
+              Building Intelligent
+            </h1>
+          </div>
+          <div className="overflow-hidden mb-8">
+            <h1 className="hero-text-line text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
+              Systems for the Future
+            </h1>
+          </div>
+
+          <div className="overflow-hidden mb-10 max-w-2xl mx-auto">
+            <p className="hero-text-line text-xl md:text-2xl text-zinc-500 dark:text-zinc-400 font-light">
+              We design, develop, and deploy AI-powered digital products that redefine industries.
+            </p>
+          </div>
+
+          <div ref={heroButtonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button size="lg" className="group" onClick={() => window.location.href = '/contact'}>
+              Get Started
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+            <Button size="lg" variant="secondary" onClick={() => window.location.href = '/services'}>
+              View Services
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES / STARTUP STYLE */}
+      <section className="features-section py-24 bg-zinc-50/50 dark:bg-zinc-900/30 border-t border-zinc-200 dark:border-zinc-800/50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Powered by Advanced AI</h2>
+            <p className="max-w-xl mx-auto text-zinc-500 dark:text-zinc-400">
+              Leverage state-of-the-art models and infrastructure to scale your vision.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-auto">
+            {features.map((feature, i) => (
+              <div key={i} className="feature-card h-[400px] w-full">
+                <Card>
+                  <CardFront className="bg-white dark:bg-zinc-900/60 border-zinc-200 dark:border-white/10">
+                    <div className="p-4 rounded-full bg-zinc-100 dark:bg-white/5 w-fit mb-6">
+                      <feature.icon size={32} className="text-emerald-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
+                      <p className="text-zinc-500 dark:text-zinc-400">{feature.shortDesc}</p>
+                    </div>
+                    <div className="mt-auto pt-8 flex items-center text-sm font-medium text-emerald-500">
+                      Hover to reveal <ArrowRight className="ml-2 w-4 h-4" />
+                    </div>
+                  </CardFront>
+                  <CardBack>
+                    <feature.icon size={48} className="text-emerald-500 mb-6 mx-auto" />
+                    <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+                    <p className="text-zinc-400 mb-8">{feature.longDesc}</p>
+                    <Button variant="outline" size="sm" className="w-full">Learn More</Button>
+                  </CardBack>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* STATS SECTION */}
+      <section className="stats-section py-24 relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="stats-header text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Unrivaled Excellence</h2>
+            <p className="max-w-xl mx-auto text-zinc-500 dark:text-zinc-400">
+              We deliver measurable impact through cutting-edge research and deployment.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <MetricCard 
+              label="Efficiency Gain" 
+              value={85} 
+              suffix="%" 
+              icon={Zap} 
+              description="Average reduction in operational bottlenecks across our client portfolio."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <MetricCard 
+              label="Data Precision" 
+              value={99} 
+              suffix=".9%" 
+              icon={Target} 
+              description="Highest accuracy achieved in our custom-trained large language models."
+            />
+            <MetricCard 
+              label="Enterprise Trust" 
+              value={250} 
+              suffix="+" 
+              icon={ShieldCheck} 
+              description="Global corporations relying on our AI security frameworks."
+            />
+            <MetricCard 
+              label="ROI Acceleration" 
+              value={4} 
+              suffix="x" 
+              icon={Rocket} 
+              description="Faster project delivery compared to traditional software cycles."
+            />
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* PROCESS SECTION */}
+      <section className="process-section py-24 bg-white dark:bg-black relative">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            <div className="lg:w-1/3 sticky top-24">
+              <h2 className="process-title text-3xl md:text-5xl font-display font-bold mb-6 leading-tight">
+                Our Proven AI <span className="text-emerald-500">Methodology</span>
+              </h2>
+              <p className="text-zinc-500 dark:text-zinc-400 mb-8 max-w-sm">
+                A seamless transition from conceptualizing ideas to deploying scalable enterprise-grade systems.
+              </p>
+              <Button onClick={() => window.location.href = '/contact'} className="group">
+                Start Your Journey
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+            
+            <div className="lg:w-2/3 flex flex-col gap-6">
+              <ProcessStep 
+                number="01" 
+                title="Discovery Phase" 
+                icon={Search}
+                description="We deep-dive into your datasets, workflows, and business objectives to identify high-impact AI opportunities."
+              />
+              <ProcessStep 
+                number="02" 
+                title="Strategic Prototyping" 
+                icon={Layers}
+                description="Rapid development of MVPs to validate core hypotheses and demonstrate tangible value before full-scale build."
+              />
+              <ProcessStep 
+                number="03" 
+                title="Model Development" 
+                icon={BrainCircuit}
+                description="Architecture selection and rigorous training of custom models optimized for your specific performance metrics."
+              />
+              <ProcessStep 
+                number="04" 
+                title="Deployment & Scaling" 
+                icon={Rocket}
+                description="Final integration into existing tech stacks with robust monitoring and auto-scaling infrastructure."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <section className="py-24 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/10">
+        <div className="container mx-auto px-6 overflow-hidden">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16 px-4">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">What Our Clients Say</h2>
+              <p className="text-zinc-500 dark:text-zinc-400">Direct impact documented by our valued partners.</p>
+            </div>
+            <div className="flex gap-4 mb-2">
+              <div className="flex -space-x-4">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="w-12 h-12 rounded-full border-4 border-zinc-50 dark:border-zinc-900 bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-xs font-bold ring-2 ring-emerald-500/20">
+                    {String.fromCharCode(64 + i)}
+                  </div>
+                ))}
+              </div>
+              <div className="text-right">
+                <div className="text-xl font-bold">4.9/5</div>
+                <div className="text-xs text-zinc-500 uppercase tracking-widest font-mono">Rating Score</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((t, i) => (
+              <GlassPane key={i} className="p-8 border-emerald-500/10 hover:border-emerald-500/30 transition-colors">
+                <div className="flex gap-1 mb-6 text-emerald-500">
+                  {[...Array(5)].map((_, j) => (
+                    <Zap key={j} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <p className="text-lg italic text-zinc-700 dark:text-zinc-300 mb-8 leading-relaxed">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500 font-bold">
+                    {t.author[0]}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm">{t.author}</h4>
+                    <p className="text-xs text-zinc-500">{t.role}</p>
+                  </div>
+                </div>
+              </GlassPane>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SOCIAL PROOF LOGOS (Placeholder) */}
+      <section className="py-16 border-y border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-sm font-mono text-zinc-500 mb-8 uppercase tracking-widest">Trusted by industry leaders</p>
+          <div className="flex flex-wrap justify-center gap-12 sm:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            {/* Placeholders for logos */}
+            <div className="text-2xl font-bold font-display">OPENAI</div>
+            <div className="text-2xl font-bold font-display">VERCEL</div>
+            <div className="text-2xl font-bold font-display">LINEAR</div>
+            <div className="text-2xl font-bold font-display">ANTHROPIC</div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
+const features = [
+  {
+    title: "AI Strategy",
+    shortDesc: "Strategic implementation of AI technologies.",
+    longDesc: "We help you identify high-impact AI opportunities and build a roadmap for implementation that drives real business value.",
+    icon: BrainCircuit,
+  },
+  {
+    title: "Custom Models",
+    shortDesc: "Fine-tuned LLMs for specific use cases.",
+    longDesc: "Develop and deploy custom language models trained on your proprietary data for superior performance and privacy.",
+    icon: Cpu,
+  },
+  {
+    title: "Automation Agents",
+    shortDesc: "Autonomous agents that work 24/7.",
+    longDesc: "Deploy intelligent agents that handle complex workflows, customer support, and data analysis without human intervention.",
+    icon: Bot,
+  },
+];
+
+const testimonials = [
+  {
+    quote: "The efficiency gains were immediate. Our workflow overhead dropped by 40% in the first quarter of deployment.",
+    author: "Sarah Chen",
+    role: "CTO, NexaCorp"
+  },
+  {
+    quote: "Building proprietary models seemed daunting until we partnered with AI Agency. Their expertise is unmatched.",
+    author: "Marcus Thorne",
+    role: "Head of AI, FluxFlow"
+  },
+  {
+    quote: "The safety frameworks they implemented allowed us to confidently scale our LLM across global regions.",
+    author: "Evelyn Ross",
+    role: "Security Director, SecureNet"
+  }
+];
