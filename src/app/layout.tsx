@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 
@@ -33,8 +32,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <SmoothScroll>
-            <Navbar />
-            <main className="min-h-screen pt-20">
+            <main className="min-h-screen">
               {children}
             </main>
             <Footer />

@@ -1,56 +1,24 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/Button";
 import { Card, CardFront, CardBack } from "@/components/ui/Card";
-import { ArrowRight, Bot, BrainCircuit, Cpu, Zap, Target, Layers, ShieldCheck, Users, BarChart3, Search, MessageSquare, Rocket } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, Bot, BrainCircuit, Cpu, Zap, Target, Layers, ShieldCheck, Search, Rocket } from "lucide-react";
 import { GlassPane } from "@/components/ui/GlassPane";
 import { MetricCard } from "@/components/ui/MetricCard";
 import { ProcessStep } from "@/components/ui/ProcessStep";
-import { useState, useEffect } from "react";
+import { HeroWave } from "@/components/ui/ai-input-hero";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
-  const heroTextRef = useRef<HTMLDivElement>(null);
-  const heroButtonsRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   useGSAP(
     () => {
-      const tl = gsap.timeline();
-
-      // Hero Text Reveal
-      tl.from(".hero-text-line", {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power4.out",
-      })
-        .from(
-          heroButtonsRef.current,
-          {
-            y: 20,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.5"
-        );
-
       // Features Cards Stagger
       gsap.from(".feature-card", {
         scrollTrigger: {
@@ -93,53 +61,12 @@ export default function Home() {
 
   return (
     <div ref={container} className="flex flex-col bg-dot-pattern">
-      {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        {/* Abstract Background */}
-        <div className="absolute inset-0 -z-10 bg-grid-pattern opacity-50" />
-        <div className="absolute inset-0 -z-10">
-          <div 
-            className="absolute w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] transition-transform duration-1000 ease-out"
-            style={{ 
-              left: `${mousePos.x - 300}px`, 
-              top: `${mousePos.y - 300}px`,
-              opacity: 0.4
-            }} 
-          />
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[120px] animate-pulse-slow" />
-          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-sky-500/10 rounded-full blur-[100px] animate-pulse-slow delay-700" />
-          <div className="absolute inset-0 bg-noise opacity-30" />
-        </div>
-
-        <div className="container mx-auto px-6 text-center z-10" ref={heroTextRef}>
-          <div className="overflow-hidden mb-4">
-            <h1 className="hero-text-line text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
-              Building Intelligent
-            </h1>
-          </div>
-          <div className="overflow-hidden mb-8">
-            <h1 className="hero-text-line text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
-              Systems for the Future
-            </h1>
-          </div>
-
-          <div className="overflow-hidden mb-10 max-w-2xl mx-auto">
-            <p className="hero-text-line text-xl md:text-2xl text-zinc-500 dark:text-zinc-400 font-light">
-              We design, develop, and deploy AI-powered digital products that redefine industries.
-            </p>
-          </div>
-
-          <div ref={heroButtonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="group" onClick={() => window.location.href = '/contact'}>
-              Get Started
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="secondary" onClick={() => window.location.href = '/services'}>
-              View Services
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* NEW HERO SECTION */}
+      <HeroWave 
+        title="Building Intelligent Systems for the Future"
+        subtitle="We design, develop, and deploy AI-powered digital products that redefine industries."
+        onPromptSubmit={(val) => console.log("Prompt submitted:", val)}
+      />
 
       {/* FEATURES / STARTUP STYLE */}
       <section className="features-section py-24 bg-zinc-50/50 dark:bg-zinc-900/30 border-t border-zinc-200 dark:border-zinc-800/50">
