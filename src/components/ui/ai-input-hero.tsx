@@ -7,6 +7,7 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import gsap from "gsap";
+import { MinimalistDock } from "@/components/ui/minimal-dock";
 
 export type HeroWaveProps = {
   className?: string;
@@ -869,6 +870,7 @@ export function HeroWave({ className, style, extendLeftPx = 800, title = "Build 
           overflow: "hidden"
         }}
       />
+      <MinimalistDock />
     </section>
   );
 }
