@@ -69,11 +69,11 @@ export default function Home() {
       />
 
       {/* FEATURES / STARTUP STYLE */}
-      <section className="features-section py-24 bg-zinc-50/50 dark:bg-zinc-900/30 border-t border-zinc-200 dark:border-zinc-800/50">
+      <section className="features-section py-24 bg-zinc-900/30 border-t border-zinc-800/50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Powered by Advanced AI</h2>
-            <p className="max-w-xl mx-auto text-zinc-500 dark:text-zinc-400">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-white">Powered by Advanced AI</h2>
+            <p className="max-w-xl mx-auto text-zinc-400">
               Leverage state-of-the-art models and infrastructure to scale your vision.
             </p>
           </div>
@@ -82,13 +82,13 @@ export default function Home() {
             {features.map((feature, i) => (
               <div key={i} className="feature-card h-[400px] w-full">
                 <Card>
-                  <CardFront className="bg-white dark:bg-zinc-900/60 border-zinc-200 dark:border-white/10">
-                    <div className="p-4 rounded-full bg-zinc-100 dark:bg-white/5 w-fit mb-6">
+                  <CardFront className="bg-zinc-900/60 border-white/10">
+                    <div className="p-4 rounded-full bg-white/5 w-fit mb-6">
                       <feature.icon size={32} className="text-emerald-500" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
-                      <p className="text-zinc-500 dark:text-zinc-400">{feature.shortDesc}</p>
+                      <h3 className="text-2xl font-bold mb-2 text-white">{feature.title}</h3>
+                      <p className="text-zinc-400">{feature.shortDesc}</p>
                     </div>
                     <div className="mt-auto pt-8 flex items-center text-sm font-medium text-emerald-500">
                       Hover to reveal <ArrowRight className="ml-2 w-4 h-4" />
@@ -111,8 +111,8 @@ export default function Home() {
       <section className="stats-section py-24 relative overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="stats-header text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Unrivaled Excellence</h2>
-            <p className="max-w-xl mx-auto text-zinc-500 dark:text-zinc-400">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-white">Unrivaled Excellence</h2>
+            <p className="max-w-xl mx-auto text-zinc-400">
               We deliver measurable impact through cutting-edge research and deployment.
             </p>
           </div>
@@ -151,14 +151,14 @@ export default function Home() {
       </section>
 
       {/* PROCESS SECTION */}
-      <section className="process-section py-24 bg-white dark:bg-black relative">
+      <section className="process-section py-24 bg-black relative">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="lg:w-1/3 sticky top-24">
-              <h2 className="process-title text-3xl md:text-5xl font-display font-bold mb-6 leading-tight">
+              <h2 className="process-title text-3xl md:text-5xl font-display font-bold mb-6 leading-tight text-white">
                 Our Proven AI <span className="text-emerald-500">Methodology</span>
               </h2>
-              <p className="text-zinc-500 dark:text-zinc-400 mb-8 max-w-sm">
+              <p className="text-zinc-400 mb-8 max-w-sm">
                 A seamless transition from conceptualizing ideas to deploying scalable enterprise-grade systems.
               </p>
               <Button onClick={() => window.location.href = '/contact'} className="group">
@@ -198,23 +198,23 @@ export default function Home() {
       </section>
 
       {/* TESTIMONIALS SECTION */}
-      <section className="py-24 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/10">
+      <section className="py-24 border-t border-zinc-800 bg-zinc-900/10">
         <div className="container mx-auto px-6 overflow-hidden">
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16 px-4">
             <div>
-              <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">What Our Clients Say</h2>
-              <p className="text-zinc-500 dark:text-zinc-400">Direct impact documented by our valued partners.</p>
+              <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 text-white">What Our Clients Say</h2>
+              <p className="text-zinc-400">Direct impact documented by our valued partners.</p>
             </div>
             <div className="flex gap-4 mb-2">
               <div className="flex -space-x-4">
                 {[1,2,3,4].map(i => (
-                  <div key={i} className="w-12 h-12 rounded-full border-4 border-zinc-50 dark:border-zinc-900 bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-xs font-bold ring-2 ring-emerald-500/20">
+                  <div key={i} className="w-12 h-12 rounded-full border-4 border-zinc-900 bg-zinc-800 flex items-center justify-center text-xs font-bold ring-2 ring-emerald-500/20 text-white">
                     {String.fromCharCode(64 + i)}
                   </div>
                 ))}
               </div>
               <div className="text-right">
-                <div className="text-xl font-bold">4.9/5</div>
+                <div className="text-xl font-bold text-white">4.9/5</div>
                 <div className="text-xs text-zinc-500 uppercase tracking-widest font-mono">Rating Score</div>
               </div>
             </div>
@@ -228,7 +228,7 @@ export default function Home() {
                     <Zap key={j} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <p className="text-lg italic text-zinc-700 dark:text-zinc-300 mb-8 leading-relaxed">
+                <p className="text-lg italic text-zinc-300 mb-8 leading-relaxed">
                   "{t.quote}"
                 </p>
                 <div className="flex items-center gap-4">
@@ -247,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* SOCIAL PROOF LOGOS (Placeholder) */}
-      <section className="py-16 border-y border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">
+      <section className="py-16 border-y border-zinc-800 bg-black">
         <div className="container mx-auto px-6 text-center">
           <p className="text-sm font-mono text-zinc-500 mb-8 uppercase tracking-widest">Trusted by industry leaders</p>
           <div className="flex flex-wrap justify-center gap-12 sm:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">

@@ -1,12 +1,13 @@
 "use client";
 
 import { GlassPane } from "@/components/ui/GlassPane";
-import { User, Rocket, Shield, Globe, Award, Linkedin, Twitter } from "lucide-react";
+import { User, Rocket, Shield, Award, Linkedin, Twitter } from "lucide-react";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function About() {
     const container = useRef<HTMLDivElement>(null);
@@ -21,37 +22,41 @@ export default function About() {
             ease: "power4.out",
         });
 
-        gsap.from(".value-card", {
-            scrollTrigger: {
-                trigger: ".values-section",
-                start: "top 80%",
-            },
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
+        (gsap.utils.toArray(".value-card") as HTMLElement[]).forEach((card) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out",
+            });
         });
-
-        gsap.from(".member-card", {
-            scrollTrigger: {
-                trigger: ".team-section",
-                start: "top 80%",
-            },
-            scale: 0.9,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "back.out(1.7)",
+ 
+        (gsap.utils.toArray(".member-card") as HTMLElement[]).forEach((card) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none",
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 1,
+                ease: "back.out(1.7)",
+            });
         });
     }, { scope: container });
 
     return (
-        <div ref={container} className="min-h-screen py-24 bg-zinc-50 dark:bg-black bg-dot-pattern">
+        <div ref={container} className="min-h-screen py-24 bg-black bg-dot-pattern">
             <div className="container mx-auto px-6">
                 <div className="max-w-4xl mx-auto mb-32 text-center">
-                    <h1 className="reveal-text text-5xl md:text-7xl font-display font-bold mb-8">Our Vision for AI</h1>
-                    <p className="reveal-text text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
+                    <h1 className="reveal-text text-5xl md:text-7xl font-display font-bold mb-8 text-white">Our Vision for AI</h1>
+                    <p className="reveal-text text-xl text-zinc-400 leading-relaxed font-light">
                         Founded by a group of industry veterans from Silicon Valley's leading research labs, we are dedicated to building systems that don't just solve problems, but anticipate them.
                     </p>
                 </div>
@@ -63,8 +68,8 @@ export default function About() {
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-wider mb-6">
                                 <Rocket size={14} /> Our Mission
                             </div>
-                            <h2 className="text-4xl font-bold mb-8 leading-tight">Empowering a Smarter, Faster Future</h2>
-                            <p className="text-lg text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed">
+                            <h2 className="text-4xl font-bold mb-8 leading-tight text-white">Empowering a Smarter, Faster Future</h2>
+                            <p className="text-lg text-zinc-400 mb-6 leading-relaxed">
                                 Our goal is to bridge the gap between complex research and real-world utility. We build autonomous agents that learn, adapt, and scale seamlessly with your organizational needs.
                             </p>
                             <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed italic border-l-4 border-emerald-500 pl-6 py-2">
@@ -82,14 +87,14 @@ export default function About() {
                 </section>
 
                 {/* Evolution Section */}
-                <section className="mb-32 py-20 bg-zinc-900/5 dark:bg-white/5 rounded-[3rem] px-8 lg:px-16 overflow-hidden relative">
+                <section className="mb-32 py-20 bg-white/5 rounded-[3rem] px-8 lg:px-16 overflow-hidden relative">
                     <div className="max-w-3xl">
                         <h2 className="text-3xl font-bold mb-8">The Evolution</h2>
                         <div className="space-y-12">
                             <div className="relative pl-10 border-l border-emerald-500/30">
                                 <div className="absolute left-[-5px] top-0 w-[10px] h-[10px] rounded-full bg-emerald-500" />
-                                <h4 className="text-xl font-bold mb-2">2021: The Research Lab</h4>
-                                <p className="text-zinc-500 dark:text-zinc-400">Started as an independent research collective focusing on multi-agent reinforcement learning.</p>
+                                <h4 className="text-xl font-bold mb-2 text-white">2021: The Research Lab</h4>
+                                <p className="text-zinc-400">Started as an independent research collective focusing on multi-agent reinforcement learning.</p>
                             </div>
                             <div className="relative pl-10 border-l border-emerald-500/30">
                                 <div className="absolute left-[-5px] top-0 w-[10px] h-[10px] rounded-full bg-emerald-500" />
@@ -107,11 +112,11 @@ export default function About() {
 
                 {/* Values */}
                 <section className="values-section mb-32">
-                    <h2 className="text-4xl font-bold mb-16 text-center">Our Core Operating Principles</h2>
+                    <h2 className="text-4xl font-bold mb-16 text-center text-white">Our Core Operating Principles</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {values.map((v, i) => (
-                            <div key={i} className="value-card group p-10 rounded-3xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-white/5 hover:border-emerald-500/50 transition-all duration-500">
-                                <div className="p-3 rounded-xl bg-zinc-100 dark:bg-white/5 w-fit mb-8 group-hover:bg-emerald-500 transition-colors">
+                            <div key={i} className="value-card group p-10 rounded-3xl bg-zinc-900/40 border border-white/5 hover:border-emerald-500/50 transition-all duration-500">
+                                <div className="p-3 rounded-xl bg-white/5 w-fit mb-8 group-hover:bg-emerald-500 transition-colors">
                                     <v.icon size={28} className="text-emerald-500 group-hover:text-white transition-colors" />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-4">{v.title}</h3>
@@ -136,9 +141,9 @@ export default function About() {
                                         <User size={48} className="text-zinc-400 group-hover:scale-110 transition-transform duration-500" />
                                     </div>
                                 </div>
-                                <h4 className="font-bold text-xl mb-1">{member.name}</h4>
+                                <h4 className="font-bold text-xl mb-1 text-white">{member.name}</h4>
                                 <p className="text-sm text-emerald-500 mb-4 font-mono uppercase tracking-widest">{member.role}</p>
-                                <p className="text-xs text-zinc-500 mb-6 leading-relaxed italic">"{member.bio}"</p>
+                                <p className="text-xs text-zinc-500 mb-6 leading-relaxed italic text-zinc-400">"{member.bio}"</p>
                                 <div className="flex justify-center gap-4 opacity-30 group-hover:opacity-100 transition-opacity">
                                     <Twitter size={16} className="cursor-pointer hover:text-emerald-500" />
                                     <Linkedin size={16} className="cursor-pointer hover:text-emerald-500" />

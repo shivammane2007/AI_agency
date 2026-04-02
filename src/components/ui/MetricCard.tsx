@@ -5,6 +5,9 @@ import { LucideIcon } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface MetricCardProps {
   label: string;
@@ -48,7 +51,7 @@ export function MetricCard({ label, value, suffix = "", icon: Icon, description,
     <div 
       ref={container}
       className={cn(
-        "group relative overflow-hidden p-8 rounded-3xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-white/5 hover:border-emerald-500/50 transition-all duration-500",
+        "group relative overflow-hidden p-8 rounded-3xl bg-zinc-900/40 border border-white/5 hover:border-emerald-500/50 transition-all duration-500",
         className
       )}
     >
@@ -68,8 +71,8 @@ export function MetricCard({ label, value, suffix = "", icon: Icon, description,
           <span className="text-2xl font-bold text-emerald-500">{suffix}</span>
         </div>
         
-        <h4 className="text-lg font-semibold mb-2">{label}</h4>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <h4 className="text-lg font-semibold mb-2 text-white">{label}</h4>
+        <p className="text-sm text-zinc-400 leading-relaxed">
           {description}
         </p>
       </div>

@@ -5,6 +5,9 @@ import { LucideIcon } from "lucide-react";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface ProcessStepProps {
   number: string;
@@ -31,7 +34,7 @@ export function ProcessStep({ number, title, description, icon: Icon, className 
   }, { scope: container });
 
   return (
-    <div ref={container} className={cn("group relative flex gap-8 p-6 rounded-2xl transition-all duration-500 hover:bg-white/5", className)}>
+    <div ref={container} className={cn("group relative flex gap-8 p-6 rounded-2xl transition-all duration-500 hover:bg-zinc-800/30", className)}>
       <div className="flex-shrink-0 relative">
         <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-500">
           <Icon size={32} />
@@ -41,8 +44,8 @@ export function ProcessStep({ number, title, description, icon: Icon, className 
         </div>
       </div>
       <div>
-        <h3 className="text-xl font-bold mb-2 group-hover:text-emerald-500 transition-colors">{title}</h3>
-        <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <h3 className="text-xl font-bold mb-2 group-hover:text-emerald-500 transition-colors text-white">{title}</h3>
+        <p className="text-zinc-400 leading-relaxed">
           {description}
         </p>
       </div>

@@ -9,22 +9,15 @@
   --emerald-muted: #10B981;
   --teal-subtle: #14B8A6;
 
-  /* Semantic */
-  --background: var(--off-white);
-  --foreground: var(--charcoal);
-  --card-bg: rgba(255, 255, 255, 0.6);
-  --card-border: rgba(0, 0, 0, 0.05);
-
-  /* Font variables (set by Next.js) */
-  --font-inter: 'Inter', sans-serif;
-  --font-space-grotesk: 'Space Grotesk', sans-serif;
-}
-
-.dark {
+  /* Semantic (FORCED DARK) */
   --background: var(--charcoal);
   --foreground: var(--off-white);
   --card-bg: rgba(30, 30, 36, 0.6);
   --card-border: rgba(255, 255, 255, 0.1);
+
+  /* Font variables (set by Next.js) */
+  --font-inter: 'Inter', sans-serif;
+  --font-space-grotesk: 'Space Grotesk', sans-serif;
 }
 
 @theme inline {
@@ -110,12 +103,8 @@ body {
 
 /* Custom Background Patterns */
 .bg-dot-pattern {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.dark .bg-dot-pattern {
   background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 .animate-pulse-slow {
@@ -135,12 +124,6 @@ body {
 
 .bg-grid-pattern {
   background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
-}
-
-.dark .bg-grid-pattern {
   background-image: 
     linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);

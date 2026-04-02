@@ -6,8 +6,9 @@ import { Bot, BrainCircuit, Code2, Cpu, Eye, MessageSquareCode, Sparkles, ArrowR
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Services() {
     const container = useRef<HTMLDivElement>(null);
@@ -21,28 +22,30 @@ export default function Services() {
             ease: "power4.out",
         });
 
-        gsap.from(".service-card-wrapper", {
-            scrollTrigger: {
-                trigger: ".service-grid",
-                start: "top 80%",
-            },
-            y: 60,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out",
+        (gsap.utils.toArray(".service-card-wrapper") as HTMLElement[]).forEach((card) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none",
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+            });
         });
     }, { scope: container });
 
     return (
-        <div ref={container} className="min-h-screen py-24 bg-zinc-50 dark:bg-black bg-dot-pattern">
+        <div ref={container} className="min-h-screen py-24 bg-black bg-dot-pattern">
             <div className="container mx-auto px-6">
                 <div className="reveal-header text-center mb-24">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-6">
                         <Sparkles size={14} /> Full Spectrum AI
                     </div>
-                    <h1 className="text-5xl md:text-8xl font-display font-bold mb-8 tracking-tighter">Our <span className="text-emerald-500">Capabilities</span>.</h1>
-                    <p className="text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <h1 className="reveal-header text-5xl md:text-8xl font-display font-bold mb-8 tracking-tighter text-white">Full-Stack <span className="text-emerald-500 italic">GenAI</span></h1>
+                    <p className="reveal-header text-xl text-zinc-300 max-w-2xl mx-auto font-light leading-relaxed">
                         From high-level strategy to low-level model optimization, we offer the technical expertise required to lead in the age of intelligence.
                     </p>
                 </div>
@@ -51,14 +54,14 @@ export default function Services() {
                     {services.map((service, i) => (
                         <div key={i} className="service-card-wrapper h-full w-full">
                             <Card>
-                                <CardFront className="bg-white dark:bg-zinc-900/40 border-zinc-200 dark:border-white/10 group-hover:border-emerald-500/50 transition-all duration-500 p-10">
-                                    <div className="p-4 rounded-2xl bg-zinc-100 dark:bg-white/5 w-fit mb-8 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500">
+                                <CardFront className="bg-zinc-900/40 border-white/10 group-hover:border-emerald-500/50 transition-all duration-500 p-10">
+                                    <div className="p-4 rounded-2xl bg-white/5 w-fit mb-8 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500">
                                         <service.icon size={32} className="text-emerald-500 group-hover:text-white transition-colors" />
                                     </div>
                                     <div className="mb-8">
                                         <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
                                         <div className="w-12 h-1 bg-emerald-500 rounded-full mb-6 group-hover:w-24 transition-all duration-700" />
-                                        <p className="text-zinc-500 dark:text-zinc-400 line-clamp-3 font-light leading-relaxed">
+                                        <p className="text-zinc-400 line-clamp-3 font-light leading-relaxed">
                                             {service.description}
                                         </p>
                                     </div>

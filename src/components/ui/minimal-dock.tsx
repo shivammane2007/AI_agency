@@ -36,20 +36,20 @@ const DockItemComponent: React.FC<DockItemProps> = ({ item, isHovered, onHover }
       <div
         className={`
           relative flex items-center justify-center
-          w-11 h-11 rounded-xl
+          w-10 h-10 rounded-xl
           bg-black/20 backdrop-blur-md
           border border-white/10
           transition-all duration-300 ease-out
           cursor-pointer
           ${isHovered 
-            ? 'scale-110 bg-emerald-500/20 border-emerald-500/40 -translate-y-2 shadow-lg shadow-emerald-500/20' 
-            : 'hover:scale-105 hover:bg-white/5 hover:-translate-y-1'
+            ? 'bg-emerald-500/20 border-emerald-500/40 -translate-y-1.5 shadow-lg shadow-emerald-500/20' 
+            : 'hover:bg-white/5 hover:-translate-y-0.5'
           }
         `}
       >
         <div className={`
           text-white transition-all duration-300
-          ${isHovered ? 'text-emerald-400 scale-110 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]' : 'text-zinc-400 group-hover:text-white'}
+          ${isHovered ? 'text-emerald-400 scale-125 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]' : 'text-zinc-400 group-hover:text-white'}
         `}>
           {item.icon}
         </div>
@@ -57,7 +57,7 @@ const DockItemComponent: React.FC<DockItemProps> = ({ item, isHovered, onHover }
       
       {/* Tooltip */}
       <div className={`
-        absolute -top-12 left-1/2 transform -translate-x-1/2
+        absolute -bottom-10 left-1/2 transform -translate-x-1/2
         px-3 py-1.5 rounded-lg
         bg-zinc-900/90 backdrop-blur-xl
         text-white text-xs font-medium
@@ -66,14 +66,14 @@ const DockItemComponent: React.FC<DockItemProps> = ({ item, isHovered, onHover }
         pointer-events-none
         whitespace-nowrap
         ${isHovered 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-2'
+          ? 'opacity-100 translate-y-2' 
+          : 'opacity-0 translate-y-0'
         }
         shadow-xl
       `}>
         {item.label}
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2">
-          <div className="w-2 h-2 bg-zinc-900/90 rotate-45 border-r border-b border-white/10"></div>
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2">
+          <div className="w-2 h-2 bg-zinc-900/90 rotate-45 border-l border-t border-white/10"></div>
         </div>
       </div>
     </Link>
@@ -84,17 +84,17 @@ export const MinimalistDock: React.FC = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   return (
-    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50">
       <div className="relative">
         {/* Dock Container */}
         <div className={`
-          flex items-end gap-3 px-4 py-3
+          flex items-center gap-2 px-3 py-2.5
           rounded-2xl
-          bg-zinc-950/40 backdrop-blur-2xl
-          border border-white/5
+          bg-zinc-950/60 backdrop-blur-3xl
+          border border-white/10
           shadow-[0_0_40px_rgba(0,0,0,0.5)]
-          transition-all duration-500 ease-out
-          ${hoveredItem ? 'scale-[1.02]' : ''}
+          transition-all duration-300 ease-out
+          w-fit h-[64px]
         `}>
           {dockItems.map((item) => (
             <DockItemComponent
@@ -106,24 +106,23 @@ export const MinimalistDock: React.FC = () => {
           ))}
         </div>
         
-        {/* Reflection Effect */}
-        <div className="absolute top-full left-0 right-0 h-12 overflow-hidden pointer-events-none">
+        {/* Reflection Effect (Above) */}
+        <div className="absolute bottom-full left-0 right-0 h-10 overflow-hidden pointer-events-none">
           <div className={`
-            flex items-start gap-3 px-4 py-3
+            flex items-center gap-2 px-3 py-2.5
             rounded-2xl
-            opacity-20
-            transform scale-y-[-1] blur-sm
-            transition-all duration-500 ease-out
-            ${hoveredItem ? 'scale-[1.02] scale-y-[-1.02]' : ''}
+            opacity-15
+            transform scale-y-[-1] blur-md
+            transition-all duration-300 ease-out
           `}>
             {dockItems.map((item) => (
               <div
                 key={`reflection-${item.id}`}
                 className={`
                   flex items-center justify-center
-                  w-11 h-11 rounded-xl
+                  w-10 h-10 rounded-xl
                   transition-all duration-300 ease-out
-                  ${hoveredItem === item.id ? 'translate-y-2' : ''}
+                  ${hoveredItem === item.id ? 'translate-y-[-4px]' : ''}
                 `}
               >
                 <div className="text-emerald-500/50">

@@ -5,10 +5,11 @@ import Link from "next/link";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MetricCard } from "@/components/ui/MetricCard";
 import { GlassPane } from "@/components/ui/GlassPane";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function CaseStudies() {
     const container = useRef<HTMLDivElement>(null);
@@ -21,25 +22,27 @@ export default function CaseStudies() {
             ease: "power4.out",
         });
 
-        gsap.from(".case-card", {
-            scrollTrigger: {
-                trigger: ".case-grid",
-                start: "top 80%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "power3.out",
+        (gsap.utils.toArray(".case-card") as HTMLElement[]).forEach((card) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+            });
         });
     }, { scope: container });
 
     return (
-        <div ref={container} className="min-h-screen py-24 bg-zinc-50 dark:bg-black bg-dot-pattern">
+        <div ref={container} className="min-h-screen py-24 bg-black bg-dot-pattern">
             <div className="container mx-auto px-6">
                 <div className="reveal-header text-center mb-24">
-                    <h1 className="text-5xl md:text-8xl font-display font-bold mb-8 tracking-tighter">Impact <span className="text-emerald-500">Stories</span></h1>
-                    <p className="text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <h1 className="text-5xl md:text-8xl font-display font-bold mb-8 tracking-tighter text-white">Impact <span className="text-emerald-500">Stories</span></h1>
+                    <p className="text-xl text-zinc-300 max-w-2xl mx-auto font-light leading-relaxed">
                         Explore how we've partnered with industry leaders to deploy transformative AI systems that deliver measurable, high-stakes results.
                     </p>
                 </div>
@@ -68,14 +71,14 @@ export default function CaseStudies() {
                                 </div>
                                 
                                 <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                                    <h2 className="text-4xl md:text-5xl font-bold mb-6 group-hover:text-emerald-500 transition-colors leading-tight">{study.title}</h2>
-                                    <p className="text-xl text-zinc-500 dark:text-zinc-400 mb-10 leading-relaxed font-light italic">
+                                    <h2 className="text-4xl md:text-5xl font-bold mb-6 group-hover:text-emerald-500 transition-colors leading-tight text-white">{study.title}</h2>
+                                    <p className="text-xl text-zinc-400 mb-10 leading-relaxed font-light italic">
                                         "{study.description}"
                                     </p>
                                     
                                     <div className="grid grid-cols-2 gap-4 mb-10">
                                         {study.stats.map((stat, si) => (
-                                            <div key={si} className="p-6 rounded-3xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-white/5">
+                                            <div key={si} className="p-6 rounded-3xl bg-zinc-900/40 border border-white/5">
                                                 <div className="text-emerald-500 font-display text-3xl font-bold mb-1">{stat.value}</div>
                                                 <div className="text-xs text-zinc-500 uppercase tracking-widest font-bold">{stat.label}</div>
                                             </div>
@@ -89,7 +92,7 @@ export default function CaseStudies() {
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-sm mb-1 uppercase tracking-wider text-emerald-500">The Challenge</h4>
-                                                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{study.challenge}</p>
+                                                <p className="text-sm text-zinc-400 leading-relaxed">{study.challenge}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -100,9 +103,9 @@ export default function CaseStudies() {
                 </div>
 
                 {/* Call to Action */}
-                <section className="mt-40 text-center py-24 bg-zinc-900/5 dark:bg-white/5 rounded-[4rem] px-8 border border-zinc-200 dark:border-white/5">
-                    <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">Ready to be the next <span className="text-emerald-500">Success</span>?</h2>
-                    <p className="text-xl text-zinc-500 dark:text-zinc-400 mb-12 max-w-xl mx-auto">
+                <section className="mt-40 text-center py-24 bg-white/5 rounded-[4rem] px-8 border border-white/5">
+                    <h2 className="text-4xl md:text-6xl font-display font-bold mb-8 text-white">Ready to be the next <span className="text-emerald-500">Success</span>?</h2>
+                    <p className="text-xl text-zinc-400 mb-12 max-w-xl mx-auto">
                         Partner with us to build custom AI solutions that drive growth and outperform competitors.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -112,7 +115,7 @@ export default function CaseStudies() {
                             </span>
                         </Link>
                         <Link href="/services">
-                            <span className="inline-flex items-center px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-2xl font-bold hover:opacity-90 transition-all">
+                            <span className="inline-flex items-center px-8 py-4 bg-white text-black rounded-2xl font-bold hover:opacity-90 transition-all">
                                 Explore Services
                             </span>
                         </Link>

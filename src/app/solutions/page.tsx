@@ -6,8 +6,9 @@ import { ArrowRight, Building, Rocket, Cog, BarChart, CheckCircle2, Sparkles, Za
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Solutions() {
     const container = useRef<HTMLDivElement>(null);
@@ -21,35 +22,37 @@ export default function Solutions() {
             ease: "power3.out",
         });
 
-        gsap.from(".solution-card", {
-            scrollTrigger: {
-                trigger: ".solution-grid",
-                start: "top 80%",
-            },
-            y: 40,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
+        (gsap.utils.toArray(".solution-card") as HTMLElement[]).forEach((card) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out",
+            });
         });
     }, { scope: container });
 
     return (
-        <div ref={container} className="min-h-screen py-24 bg-zinc-50 dark:bg-black bg-dot-pattern">
+        <div ref={container} className="min-h-screen py-24 bg-black bg-dot-pattern relative z-10">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-20">
                     <div className="reveal-item inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-6">
                         <Sparkles size={14} /> Enterprise Architectures
                     </div>
-                    <h1 className="reveal-item text-5xl md:text-8xl font-display font-bold mb-8 tracking-tighter">Scalable <span className="text-emerald-500 italic">Impact</span>.</h1>
-                    <p className="reveal-item text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <h1 className="reveal-item text-white text-5xl md:text-8xl font-display font-bold mb-8 tracking-tighter drop-shadow-sm">Scalable <span className="text-emerald-500 italic">Impact</span>.</h1>
+                    <p className="reveal-item text-xl text-zinc-300 max-w-2xl mx-auto font-light leading-relaxed">
                         We engineer custom AI ecosystems that integrate seamlessly with your existing infrastructure, ensuring long-term scalability and security.
                     </p>
                 </div>
 
                 <div className="solution-grid grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {solutions.map((solution, i) => (
-                        <GlassPane key={i} className="solution-card group p-8 md:p-12 border-emerald-500/5 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-500/5 transition-all duration-700 relative overflow-hidden">
+                        <GlassPane key={i} className="solution-card group p-8 md:p-12 bg-zinc-900/80 border-white/10 hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-700 relative overflow-hidden backdrop-blur-2xl">
                             <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity">
                                 <solution.icon size={120} />
                             </div>
@@ -64,15 +67,15 @@ export default function Solutions() {
                                     </div>
                                 </div>
                                 
-                                <h2 className="text-3xl font-bold mb-6 group-hover:text-emerald-500 transition-colors">{solution.title}</h2>
-                                <p className="text-lg text-zinc-500 dark:text-zinc-400 mb-10 leading-relaxed font-light">
+                                <h2 className="text-3xl font-bold mb-6 text-white group-hover:text-emerald-400 transition-colors drop-shadow-sm">{solution.title}</h2>
+                                <p className="text-lg text-zinc-400 dark:text-zinc-300 mb-10 leading-relaxed font-light">
                                     {solution.description}
                                 </p>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     {solution.features.map((feature, fi) => (
-                                        <div key={fi} className="flex items-center gap-3 text-sm font-medium text-zinc-600 dark:text-zinc-300">
-                                            <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                                        <div key={fi} className="flex items-center gap-3 text-sm font-medium text-zinc-300 dark:text-zinc-200">
+                                            <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
                                                 <CheckCircle2 size={12} />
                                             </div>
                                             {feature}
@@ -114,7 +117,7 @@ const solutions = [
         title: "Venture Accelerator",
         description: "Moving from idea to deployment in weeks, not months. We provide the full stack—from data cleaning to the frontend interface.",
         icon: Rocket,
-        features: ["Rapid MVP Delivery", "Serverless Architecture", "Cost-Optimized GPUs", "Launch Marketing Support"]
+        features: ["Rapid MVP Delivery ", "Serverless Architecture", "Cost-Optimized GPUs", "Marketing Support"]
     },
     {
         title: "Workflow Autonomy",
