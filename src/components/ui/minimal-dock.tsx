@@ -1,6 +1,6 @@
-'use client'
-import React, { useState } from 'react';
-import { Home, Lightbulb, Code2, Briefcase, User, Mail, Settings } from 'lucide-react';
+"use client";
+import React, { useState, useEffect } from 'react';
+import { Home, Lightbulb, Code2, Briefcase, User, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 interface DockItem {
@@ -79,12 +79,51 @@ const DockItemComponent: React.FC<DockItemProps> = ({ item, isHovered, onHover }
     </Link>
   );
 };
-
 export const MinimalistDock: React.FC = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  const scrollThreshold = 10; // Avoid jitter
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Hide on scroll down, show on scroll up
+          if (Math.abs(currentScrollY - lastScrollY) > scrollThreshold) {
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+              setIsVisible(false);
+            } else {
+              setIsVisible(true);
+            }
+          }
+
+          // Apply extra shadow/blur intensity when scrolled away from top
+          setIsScrolled(currentScrollY > 20);
+          
+          setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
-    <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50">
+    <div className={`
+      fixed top-8 left-1/2 transform -translate-x-1/2 z-[100]
+      transition-all duration-300 ease-in-out
+      ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-24 opacity-0'}
+    `}>
       <div className="relative">
         {/* Dock Container */}
         <div className={`
@@ -92,8 +131,8 @@ export const MinimalistDock: React.FC = () => {
           rounded-2xl
           bg-zinc-950/60 backdrop-blur-3xl
           border border-white/10
-          shadow-[0_0_40px_rgba(0,0,0,0.5)]
-          transition-all duration-300 ease-out
+          ${isScrolled ? 'shadow-[0_0_40px_rgba(0,0,0,0.8)] border-white/20' : 'shadow-[0_0_40px_rgba(0,0,0,0.5)]'}
+          transition-all duration-500 ease-out
           w-fit h-[64px]
         `}>
           {dockItems.map((item) => (

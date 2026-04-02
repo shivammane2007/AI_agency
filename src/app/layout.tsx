@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Footer } from "@/components/layout/Footer";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import { MinimalistDock } from "@/components/ui/minimal-dock";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" forcedTheme="dark" disableTransitionOnChange>
           <SmoothScroll>
+            <MinimalistDock />
             <main className="min-h-screen">
               {children}
             </main>
