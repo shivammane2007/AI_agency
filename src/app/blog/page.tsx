@@ -1,7 +1,7 @@
 "use client";
 
-import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/CustomCard";
+import { Button } from "@/components/ui/CustomButton";
 import { GlassPane } from "@/components/ui/GlassPane";
 import Link from "next/link";
 import { ArrowRight, Clock, Tag, TrendingUp, Sparkles } from "lucide-react";

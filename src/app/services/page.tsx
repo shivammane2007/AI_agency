@@ -1,7 +1,7 @@
 "use client";
 
-import { Card, CardFront, CardBack } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { Card, CardFront, CardBack } from "@/components/ui/CustomCard";
+import { Button } from "@/components/ui/CustomButton";
 import { Bot, BrainCircuit, Code2, Cpu, Eye, MessageSquareCode, Sparkles, ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import gsap from "gsap";

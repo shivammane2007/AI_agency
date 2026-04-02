@@ -18,6 +18,26 @@
   /* Font variables (set by Next.js) */
   --font-inter: 'Inter', sans-serif;
   --font-space-grotesk: 'Space Grotesk', sans-serif;
+
+  /* Shadcn UI Standards mapped to Dark Elite theme */
+  --card: var(--charcoal);
+  --card-foreground: var(--off-white);
+  --popover: var(--charcoal);
+  --popover-foreground: var(--off-white);
+  --primary: var(--emerald-muted);
+  --primary-foreground: #ffffff;
+  --secondary: var(--slate);
+  --secondary-foreground: var(--off-white);
+  --muted: rgba(255, 255, 255, 0.05);
+  --muted-foreground: var(--cool-gray);
+  --accent: rgba(16, 185, 129, 0.1);
+  --accent-foreground: var(--emerald-muted);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: var(--emerald-muted);
+  --radius: 0.5rem;
 }
 
 @theme inline {
@@ -35,6 +55,34 @@
 
   --font-sans: var(--font-inter);
   --font-display: var(--font-space-grotesk);
+
+  /* Shadcn UI Theme Variables */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Footer Section Variables */
+  --color-neutral: #222222;
+  --color-neutral-content: #FFFFFF;
+  --color-base-100: #f0f0f0;
+  --color-base-200: #ffffff;
+  --color-base-300: #F2F2F2;
+  --color-base-content: #0A0A0A;
+  --color-highlight: #454ADE;
 
   --animate-flip: flip 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   --animate-fade-up: fade-up 0.8s ease-out forwards;

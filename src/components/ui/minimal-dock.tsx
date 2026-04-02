@@ -120,7 +120,7 @@ export const MinimalistDock: React.FC = () => {
 
   return (
     <div className={`
-      fixed top-8 left-1/2 transform -translate-x-1/2 z-[100]
+      fixed top-0 left-1/2 transform -translate-x-1/2 z-[100]
       transition-all duration-300 ease-in-out
       ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-24 opacity-0'}
     `}>

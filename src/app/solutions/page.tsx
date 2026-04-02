@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/CustomButton";
 import { GlassPane } from "@/components/ui/GlassPane";
 import { ArrowRight, Building, Rocket, Cog, BarChart, CheckCircle2, Sparkles, Zap, Shield, Cpu } from "lucide-react";
 import { useRef } from "react";
