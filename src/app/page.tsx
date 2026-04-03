@@ -11,8 +11,25 @@ import { GlassPane } from "@/components/ui/GlassPane";
 import { MetricCard } from "@/components/ui/MetricCard";
 import { ProcessStep } from "@/components/ui/ProcessStep";
 import { UserAvatars } from "@/components/ui/user-avatars";
-import { HeroWave } from "@/components/ui/ai-input-hero";
+import dynamic from "next/dynamic";
 import { useCallback } from "react";
+
+const HeroWave = dynamic(
+  () => import("@/components/ui/ai-input-hero").then((mod) => mod.HeroWave),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="relative w-full h-[100vh] bg-black flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-emerald-500/10 to-transparent pointer-events-none" />
+        <div className="animate-pulse flex flex-col items-center gap-8 z-10 w-full max-w-2xl px-6">
+          <div className="h-16 w-3/4 bg-white/5 rounded-2xl" />
+          <div className="h-4 w-1/2 bg-white/5 rounded-full" />
+          <div className="h-14 w-full bg-white/5 rounded-2xl border border-white/10" />
+        </div>
+      </div>
+    )
+  }
+);
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
