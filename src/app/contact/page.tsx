@@ -12,27 +12,8 @@ export default function Contact() {
     const container = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline();
-        
-        tl.from(".reveal-title", {
-            y: 40,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power4.out",
-        })
-        .from(".info-item", {
-            y: 20,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out",
-        }, "-=0.8")
-        .from(".workspace-form-container", {
-            y: 40,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power4.out",
-        }, "-=0.8");
+        // Intentionally left blank to allow page to load content completely at once 
+        // without GSAP delayed fade-ins.
     }, { scope: container });
 
     return (
