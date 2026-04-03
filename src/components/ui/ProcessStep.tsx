@@ -21,16 +21,7 @@ export function ProcessStep({ number, title, description, icon: Icon, className 
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    gsap.from(container.current, {
-        scrollTrigger: {
-            trigger: container.current,
-            start: "top 90%",
-        },
-        opacity: 0,
-        x: -20,
-        duration: 0.8,
-        ease: "power2.out",
-    });
+    // Intentionally left empty to allow the component to be fully visible immediately upon load
   }, { scope: container });
 
   return (

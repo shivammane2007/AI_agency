@@ -34,17 +34,6 @@ export function MetricCard({ label, value, suffix = "", icon: Icon, description,
       },
       onUpdate: () => setDisplayValue(Math.floor(obj.val)),
     });
-
-    gsap.from(container.current, {
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top 85%",
-      },
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    });
   }, { scope: container });
 
   return (

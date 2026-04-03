@@ -10,8 +10,9 @@ import { ArrowRight, Bot, BrainCircuit, Cpu, Zap, Target, Layers, ShieldCheck, S
 import { GlassPane } from "@/components/ui/GlassPane";
 import { MetricCard } from "@/components/ui/MetricCard";
 import { ProcessStep } from "@/components/ui/ProcessStep";
-import { HeroWave } from "@/components/ui/ai-input-hero";
 import { UserAvatars } from "@/components/ui/user-avatars";
+import { HeroWave } from "@/components/ui/ai-input-hero";
+import { useCallback } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -20,45 +21,15 @@ export default function Home() {
 
   useGSAP(
     () => {
-      // Features Cards Stagger
-      gsap.from(".feature-card", {
-        scrollTrigger: {
-          trigger: ".features-section",
-          start: "top 80%",
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power2.out",
-      });
-
-      // Stats Section Fade In
-      gsap.from(".stats-header", {
-        scrollTrigger: {
-          trigger: ".stats-section",
-          start: "top 80%",
-        },
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
-
-      // Process Section Timeline
-      gsap.from(".process-title", {
-        scrollTrigger: {
-          trigger: ".process-section",
-          start: "top 80%",
-        },
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
+      // Intentionally left blank as user requested the page to load completely at once
+      // without delayed scroll-based fade-ins that cause visibility issues.
     },
     { scope: container }
   );
+
+  const handlePromptSubmit = useCallback((val: string) => {
+    console.log("Prompt submitted:", val);
+  }, []);
 
   return (
     <div ref={container} className="flex flex-col bg-dot-pattern">
@@ -66,7 +37,7 @@ export default function Home() {
       <HeroWave 
         title="Building Intelligent Systems for the Future"
         subtitle="We design, develop, and deploy AI-powered digital products that redefine industries."
-        onPromptSubmit={(val) => console.log("Prompt submitted:", val)}
+        onPromptSubmit={handlePromptSubmit}
       />
 
       {/* FEATURES / STARTUP STYLE */}
