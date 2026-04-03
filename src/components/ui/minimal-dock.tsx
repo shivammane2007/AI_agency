@@ -176,4 +176,3 @@ export const MinimalistDock: React.FC = () => {
   );
 };
 
-export default MinimalistDock;

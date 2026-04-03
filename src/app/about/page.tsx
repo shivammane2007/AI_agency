@@ -13,42 +13,8 @@ export default function About() {
     const container = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline();
-        tl.from(".reveal-text", {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power4.out",
-        });
-
-        (gsap.utils.toArray(".value-card") as HTMLElement[]).forEach((card) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 85%",
-                    toggleActions: "play none none none",
-                },
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                ease: "power2.out",
-            });
-        });
- 
-        (gsap.utils.toArray(".member-card") as HTMLElement[]).forEach((card) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 85%",
-                    toggleActions: "play none none none",
-                },
-                scale: 0.9,
-                opacity: 0,
-                duration: 1,
-                ease: "back.out(1.7)",
-            });
-        });
+        // Intentionally left blank to allow page to load content completely at once 
+        // without GSAP delayed fade-ins.
     }, { scope: container });
 
     return (
