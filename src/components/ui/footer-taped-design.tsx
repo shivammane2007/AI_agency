@@ -17,7 +17,7 @@ export const Component = () => {
 
   return (
    <footer className="my-8 px-4 max-w-5xl text-base-content mx-auto relative z-20">
-      <div className="relative bg-white rounded-3xl max-w-5xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="relative bg-black border border-white/5 rounded-3xl max-w-5xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="hidden md:block absolute -top-4 -left-8 w-[80px] h-[36px] scale-75">
           {tape}
         </div>
@@ -28,41 +28,41 @@ export const Component = () => {
           <div className='flex flex-col items-start gap-2'>
           <Link
             href="/"
-            className="flex flex-row gap-1 items-center justify-start text-2xl font-display font-extrabold text-base-content"
+            className="flex flex-row gap-1 items-center justify-start text-2xl font-display font-extrabold text-white"
           >
             AI Agency
           </Link>
-          <p className='text-neutral/50 font-medium text-base w-full md:w-4/5'>Architecting intelligent solutions for the ambitious enterprise.</p>
+          <p className='text-zinc-400 font-medium text-base w-full md:w-4/5'>Architecting intelligent solutions for the ambitious enterprise.</p>
           </div>
 
           <div className='flex flex-col md:mx-4 md:flex-row gap-2 md:gap-20 items-start md:items-start'>
 
           <div className='flex flex-col gap-1 md:gap-4'>
-          <h4 className='uppercase font-display text-md text-neutral/50 font-semibold'>Resources</h4>
-          <div className="flex flex-wrap md:flex-col gap-2 text-sm text-neutral items-start ">
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Case Studies</Link>
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Architecture</Link>
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Documentation</Link>
-            <Link className='pointer-events-none text-neutral/50 whitespace-nowrap font-medium' href="/resources/blog">Blog <span className='inline-flex ml-1 py-0.5 px-3 bg-base-300 text-xs rounded-xl -rotate-3 text-emerald-600 font-bold'>syncing</span> </Link>
+          <h4 className='uppercase font-display text-md text-zinc-400 font-semibold'>Resources</h4>
+          <div className="flex flex-wrap md:flex-col gap-2 text-sm text-zinc-400 items-start ">
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Case Studies</Link>
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Architecture</Link>
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Documentation</Link>
+            <Link className='pointer-events-none text-zinc-400 whitespace-nowrap font-medium' href="/resources/blog">Blog <span className='inline-flex ml-1 py-0.5 px-3 bg-zinc-900 text-xs rounded-xl -rotate-3 text-emerald-600 font-bold'>syncing</span> </Link>
           </div>
           </div>
 
           <div className='hidden md:flex flex-col gap-1 md:gap-4'>
-          <h4 className='uppercase whitespace-nowrap font-display text-md text-neutral/50 font-semibold'>Company</h4>
-          <div className="flex gap-2 flex-wrap md:flex-col text-sm text-neutral items-start ">
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Manifesto</Link>
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Ecosystem</Link>
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Partners</Link>
-            <Link className='pointer-events-none text-neutral/50 whitespace-nowrap font-medium' href="#">Careers <span className='inline-flex ml-1 py-0.5 px-3 bg-base-300 text-xs rounded-xl rotate-3'>hiring</span></Link>
+          <h4 className='uppercase whitespace-nowrap font-display text-md text-zinc-400 font-semibold'>Company</h4>
+          <div className="flex gap-2 flex-wrap md:flex-col text-sm text-zinc-400 items-start ">
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Manifesto</Link>
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Ecosystem</Link>
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Partners</Link>
+            <Link className='pointer-events-none text-zinc-400 whitespace-nowrap font-medium' href="#">Careers <span className='inline-flex ml-1 py-0.5 px-3 bg-zinc-900 text-xs rounded-xl rotate-3'>hiring</span></Link>
           </div>
           </div>
           
           <div className='hidden md:flex flex-col gap-1 gap-4'>
-          <h4 className='uppercase whitespace-nowrap font-display text-md text-neutral/50 font-semibold'>Legal</h4>
-          <div className="flex flex-col gap-2 text-sm text-neutral items-start ">
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Privacy Code</Link>
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Terms</Link>
-            <Link className='text-neutral/50 whitespace-nowrap font-medium hover:text-black transition-colors' href="#">Security Posture</Link>
+          <h4 className='uppercase whitespace-nowrap font-display text-md text-zinc-400 font-semibold'>Legal</h4>
+          <div className="flex flex-col gap-2 text-sm text-zinc-400 items-start ">
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Privacy Code</Link>
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Terms</Link>
+            <Link className='text-zinc-400 whitespace-nowrap font-medium hover:text-white transition-colors' href="#">Security Posture</Link>
           </div>
           </div>
         </div>

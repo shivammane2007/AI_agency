@@ -154,35 +154,37 @@ export default function WorkspaceForm() {
                   plans.find((plan) => plan.name === value) || plans[0]
                 )
               }
-              className="mt-4 space-y-4"
+              className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6"
             >
               {plans.map((plan) => (
                 <label
                   key={plan.name}
                   htmlFor={plan.name}
                   className={cn(
-                    "relative block cursor-pointer rounded-md border bg-card/60 backdrop-blur-sm transition-all overflow-hidden isolation-auto",
+                    "relative flex flex-col justify-between cursor-pointer rounded-md border bg-card/60 backdrop-blur-sm transition-all overflow-hidden isolation-auto h-full",
                     selected.name === plan.name
                       ? "border-primary/50 ring-2 ring-primary/20 shadow-[0_0_20px_rgba(16,185,129,0.15)] bg-primary/5"
                       : "border-border hover:border-primary/30"
                   )}
                 >
-                  <div className="flex items-start space-x-4 px-6 py-4 relative z-10">
-                    <div className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center">
-                      <RadioGroupItem value={plan.name} id={plan.name} />
+                  <div className="flex flex-col items-start gap-4 px-4 sm:px-5 md:px-6 py-4 relative z-10 flex-1">
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex items-center justify-center shrink-0">
+                        <RadioGroupItem value={plan.name} id={plan.name} />
+                      </div>
+                      {plan.isRecommended && (
+                        <Badge variant="default" className="ml-2 font-bold uppercase tracking-wider text-[10px]">
+                          Popular
+                        </Badge>
+                      )}
                     </div>
-                    <div className="w-full">
-                      <div className="leading-6 flex items-center">
-                        <span className="font-semibold text-foreground">
+                    <div className="w-full mt-2">
+                      <div className="leading-6 flex flex-col items-start gap-1">
+                        <span className="font-semibold text-lg text-foreground">
                           {plan.name}
                         </span>
-                        {plan.isRecommended && (
-                          <Badge variant="default" className="ml-2 font-bold uppercase tracking-wider text-[10px]">
-                            Recommended
-                          </Badge>
-                        )}
                       </div>
-                      <ul className="mt-2 space-y-1">
+                      <ul className="mt-3 space-y-1">
                         {plan.features.map((feature, index) => (
                           <li
                             key={index}
@@ -198,20 +200,20 @@ export default function WorkspaceForm() {
                       </ul>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between border-t border-border bg-black/40 px-6 py-3 relative z-10">
-                    <a
-                      href={plan.href}
-                      className="inline-flex items-center gap-1 text-sm text-primary hover:underline hover:underline-offset-4"
-                    >
-                      Learn more
-                      <ExternalLink className="h-4 w-4" aria-hidden={true} />
-                    </a>
-                    <div>
-                      <span className="text-lg font-semibold text-foreground">
+                  <div className="flex flex-col gap-2 border-t border-border bg-black/40 px-4 sm:px-5 md:px-6 py-4 relative z-10">
+                    <div className="flex items-center gap-1">
+                      <span className="text-xl font-bold text-foreground">
                         {plan.price}
                       </span>
-                      <span className="text-sm text-muted-foreground">/mo</span>
+                      <span className="text-sm font-medium text-muted-foreground">/mo</span>
                     </div>
+                    <a
+                      href={plan.href}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline hover:underline-offset-4"
+                    >
+                      Learn more
+                      <ExternalLink className="h-3 w-3" aria-hidden={true} />
+                    </a>
                   </div>
                 </label>
               ))}
