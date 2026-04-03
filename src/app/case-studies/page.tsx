@@ -53,9 +53,10 @@ export default function CaseStudies() {
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                                 <div className={i % 2 === 1 ? "lg:order-2" : ""}>
                                     <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-900 group-hover:shadow-2xl group-hover:shadow-emerald-500/10 transition-all duration-700">
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} opacity-30 group-hover:scale-110 transition-transform duration-1000`} />
-                                        <div className="absolute inset-0 flex items-center justify-center p-12">
-                                            <study.icon size={120} className="text-white opacity-20 group-hover:opacity-40 transition-opacity group-hover:scale-125 transition-transform duration-1000" />
+                                        <img src={study.image} alt={study.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000" />
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} opacity-80 mix-blend-multiply transition-all duration-1000`} />
+                                        <div className="absolute inset-0 flex items-center justify-center p-12 pointer-events-none">
+                                            <study.icon size={120} className="text-white opacity-60 group-hover:opacity-100 transition-opacity group-hover:scale-110 transition-transform duration-1000 drop-shadow-2xl" />
                                         </div>
                                         <div className="absolute top-8 left-8">
                                             <span className="px-4 py-2 bg-black/40 backdrop-blur-xl rounded-2xl text-xs font-bold text-white uppercase tracking-widest border border-white/10">
@@ -131,6 +132,7 @@ const caseStudies = [
         title: "FinTech Neo-Guard",
         category: "Deep Learning",
         icon: ShieldCheck,
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop",
         description: "Deploying a real-time anomaly detection system for a global fintech disruptor processing $2B+ monthly transactions.",
         gradient: "from-emerald-500 to-cyan-500",
         challenge: "Legacy systems were producing 30% false positives, burying human analysts in noise.",
@@ -143,6 +145,7 @@ const caseStudies = [
         title: "HealthLink Vision",
         category: "Computer Vision",
         icon: Activity,
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop",
         description: "Integrating high-precision imaging AI into diagnostic pipelines for 500+ hospitals across Europe.",
         gradient: "from-blue-600 to-indigo-600",
         challenge: "Radiologists faced significant backlogs in emergency diagnostics during peak hours.",
@@ -155,6 +158,7 @@ const caseStudies = [
         title: "GlobalLogistics AI",
         category: "Predictive Analytics",
         icon: Zap,
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1000&auto=format&fit=crop",
         description: "Optimizing the global delivery network for a Fortune 100 logistics leader using dynamic reinforcement learning.",
         gradient: "from-orange-500 to-amber-500",
         challenge: "Unpredictable fuel spikes and manual route planning led to inefficient cross-border distribution.",
@@ -167,6 +171,7 @@ const caseStudies = [
         title: "RetailFlow Conversational",
         category: "NLP",
         icon: Target,
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1000&auto=format&fit=crop",
         description: "Building an empathetic customer agent for a multi-billion dollar e-commerce platform.",
         gradient: "from-purple-500 to-pink-500",
         challenge: "Customer satisfaction was dropping due to rigid, rule-based chatbots that failed on complex queries.",

@@ -11,6 +11,7 @@ import { GlassPane } from "@/components/ui/GlassPane";
 import { MetricCard } from "@/components/ui/MetricCard";
 import { ProcessStep } from "@/components/ui/ProcessStep";
 import { HeroWave } from "@/components/ui/ai-input-hero";
+import { UserAvatars } from "@/components/ui/user-avatars";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -207,11 +208,18 @@ export default function Home() {
             </div>
             <div className="flex gap-4 mb-2">
               <div className="flex -space-x-4">
-                {[1,2,3,4].map(i => (
-                  <div key={i} className="w-12 h-12 rounded-full border-4 border-zinc-900 bg-zinc-800 flex items-center justify-center text-xs font-bold ring-2 ring-emerald-500/20 text-white">
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
+                <UserAvatars 
+                  users={[
+                    { id: 1, image: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=150&h=150&fit=crop&crop=face" },
+                    { id: 2, image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" },
+                    { id: 3, image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face" },
+                    { id: 4, image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" },
+                  ]} 
+                  maxVisible={4} 
+                  size={48} 
+                  overlap={40}
+                  className="ring-2 ring-emerald-500/20 rounded-full"
+                />
               </div>
               <div className="text-right">
                 <div className="text-xl font-bold text-white">4.9/5</div>
@@ -232,8 +240,8 @@ export default function Home() {
                   "{t.quote}"
                 </p>
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500 font-bold">
-                    {t.author[0]}
+                  <div className="w-12 h-12 rounded-full border-2 border-emerald-500/20 overflow-hidden shadow-lg shadow-emerald-500/10">
+                    <img src={t.image} alt={t.author} className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <h4 className="font-bold text-sm">{t.author}</h4>
@@ -288,16 +296,19 @@ const testimonials = [
   {
     quote: "The efficiency gains were immediate. Our workflow overhead dropped by 40% in the first quarter of deployment.",
     author: "Sarah Chen",
-    role: "CTO, NexaCorp"
+    role: "CTO, NexaCorp",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face"
   },
   {
     quote: "Building proprietary models seemed daunting until we partnered with AI Agency. Their expertise is unmatched.",
     author: "Marcus Thorne",
-    role: "Head of AI, FluxFlow"
+    role: "Head of AI, FluxFlow",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face"
   },
   {
     quote: "The safety frameworks they implemented allowed us to confidently scale our LLM across global regions.",
     author: "Evelyn Ross",
-    role: "Security Director, SecureNet"
+    role: "Security Director, SecureNet",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
   }
 ];

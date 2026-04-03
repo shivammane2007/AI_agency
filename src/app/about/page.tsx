@@ -76,11 +76,12 @@ export default function About() {
                                 "We are moving beyond simple automation into a world of collaborative intelligence."
                             </p>
                         </div>
-                        <GlassPane className="h-[400px] overflow-hidden group">
-                           <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-transparent pointer-events-none" />
+                        <GlassPane className="h-[400px] overflow-hidden group relative">
+                           <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop" alt="AI Network" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-1000" />
+                           <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-transparent to-emerald-500/20 pointer-events-none" />
                            <div className="relative h-full flex items-center justify-center">
-                               <div className="w-24 h-24 rounded-full bg-emerald-500 blur-[40px] opacity-20 group-hover:opacity-40 transition-opacity" />
-                               <div className="text-6xl text-emerald-500 font-display font-black group-hover:scale-110 transition-transform duration-700">AI</div>
+                               <div className="absolute w-24 h-24 rounded-full bg-emerald-500 blur-[40px] opacity-40 group-hover:opacity-60 transition-opacity" />
+                               <div className="text-6xl text-white font-display font-black group-hover:scale-110 transition-transform duration-700 drop-shadow-2xl">AI</div>
                            </div>
                         </GlassPane>
                     </div>
@@ -138,7 +139,7 @@ export default function About() {
                                 <div className="relative w-32 h-32 mx-auto mb-6">
                                     <div className="absolute inset-0 rounded-full border-2 border-emerald-500/20 group-hover:border-emerald-500/100 border-dashed transition-all duration-700 animate-spin-slow" />
                                     <div className="absolute inset-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden flex items-center justify-center">
-                                        <User size={48} className="text-zinc-400 group-hover:scale-110 transition-transform duration-500" />
+                                        <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                                     </div>
                                 </div>
                                 <h4 className="font-bold text-xl mb-1 text-white">{member.name}</h4>
@@ -176,9 +177,9 @@ const values = [
 ];
 
 const team = [
-    { name: "Dr. Elena Vance", role: "CEO & Co-Founder", bio: "Leading AI research for over 15 years. Prev Google Brain.", icon: User },
-    { name: "Julian Black", role: "CTO & Architect", bio: "Architect of distributed systems. Prev OpenAI Engineer.", icon: User },
-    { name: "Sophia Chen", role: "Head of Product", bio: "Expert in human-AI interaction. UX pioneer.", icon: User },
-    { name: "Marcus Thorne", role: "Strategy Director", bio: "Focused on global scale and policy alignment.", icon: User },
+    { name: "Dr. Elena Vance", role: "CEO & Co-Founder", bio: "Leading AI research for over 15 years. Prev Google Brain.", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop" },
+    { name: "Julian Black", role: "CTO & Architect", bio: "Architect of distributed systems. Prev OpenAI Engineer.", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop" },
+    { name: "Sophia Chen", role: "Head of Product", bio: "Expert in human-AI interaction. UX pioneer.", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" },
+    { name: "Marcus Thorne", role: "Strategy Director", bio: "Focused on global scale and policy alignment.", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop" },
 ];
 
