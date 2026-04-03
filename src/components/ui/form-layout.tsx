@@ -17,6 +17,16 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { Check, CircleCheck, ExternalLink } from "lucide-react";
 import { useState } from "react";
+import { UserAvatars } from "@/components/ui/user-avatars";
+import { LocationMap } from "@/components/ui/location-map";
+
+const avatarUsers = [
+  { id: 1, name: "Alice", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" },
+  { id: 2, name: "Bob", image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=face" },
+  { id: 3, name: "Charlie", image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face" },
+  { id: 4, name: "Diana", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face" },
+  { id: 5, name: "Eve", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" },
+];
 
 const highlights = [
   {
@@ -255,14 +265,36 @@ export default function WorkspaceForm() {
                 </a>
               </CardContent>
             </Card>
+            <div className="mt-8 md:mt-12 w-full flex justify-center">
+              <div className="relative z-10 flex flex-col items-center gap-4">
+                <p className="text-xs font-medium tracking-[0.2em] text-neutral-600 uppercase">
+                  Data Center
+                </p>
+                <LocationMap
+                  location="San Francisco, CA"
+                  coordinates="37.7749° N, 122.4194° W"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <Separator className="my-10 bg-white/5" />
-        <div className="flex items-center justify-end space-x-4">
-          <Button type="button" variant="ghost" className="text-muted-foreground hover:text-white">
-            Cancel
-          </Button>
-          <Button type="submit" className="font-bold tracking-wide">Update Workspace</Button>
+        <div className="flex items-center justify-between w-full">
+          {/* Avatar stack embedded in blank space left of buttons */}
+          <div className="flex items-center gap-4 hidden sm:flex">
+             <div className="flex flex-col">
+               <span className="text-sm font-medium text-foreground">Join the community</span>
+               <span className="text-xs text-muted-foreground">3k+ workspace creators</span>
+             </div>
+             <UserAvatars users={avatarUsers} maxVisible={3} size={36} overlap={40} />
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <Button type="button" variant="ghost" className="text-muted-foreground hover:text-white">
+              Cancel
+            </Button>
+            <Button type="submit" className="font-bold tracking-wide">Update Workspace</Button>
+          </div>
         </div>
       </form>
     </div>
